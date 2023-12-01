@@ -42,8 +42,8 @@ export default {
   }
   .custom-text-field {
     margin-top: 25px;
-    margin-left: 10px;
+    margin-left: 20px;
     background-color: rgba(255, 255, 255, 0);
-    max-width: 20%; /* Defina o tamanho máximo desejado para o campo de entrada */
+    /* Defina o tamanho máximo desejado para o campo de entrada */
   }
 </style>
