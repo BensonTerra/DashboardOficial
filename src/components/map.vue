@@ -16,7 +16,7 @@
  
  <script>
  import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
- import 'leaflet/dist/leaflet.css'; // reescrever para funcionar
+ import "../components/leaflet.css"; // reescrever path para funcionar
  
  export default {
    components: {
