@@ -16,7 +16,7 @@
  
  <script>
  import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
- import "../components/leaflet.css"; // reescrever path para funcionar
+
  
  export default {
    components: {
@@ -25,7 +25,7 @@
    },
    data () {
      return {
-       url: 'https://' + '{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
        center: [ 49.1193089, 6.1757156 ],
        zoom: 12,
      }
