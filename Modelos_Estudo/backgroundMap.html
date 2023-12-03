@@ -56,10 +56,12 @@
 
   // Função para calcular o nível mínimo de zoom com base na altura do mapa
   function calculateMinZoom() {
-    var minHeight = document.getElementById('map').offsetHeight;
+    var minHeight = document.getElementById('map').offsetHeight; console.log(minHeight);
     var tileSize = 256; // tamanho padrão do tile no Leaflet
     var minZoom = 0;
-    while ((tileSize * Math.pow(2, minZoom)) < minHeight) {
+    while ((tileSize * Math.pow(2, minZoom)) < minHeight) 
+    {
+      console.log(minZoom)
       minZoom++;
     }
     return minZoom;

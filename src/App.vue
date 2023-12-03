@@ -4,20 +4,31 @@ import Map from './components/map.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      searchTerm: '', // O termo de pesquisa inserido pelo usuário
+      mapHeight: ""
+    };
+  },
   components: {
     customHeader,
     Map,
   },
-  data() {
-    return {
-      searchTerm: '' // O termo de pesquisa inserido pelo usuário
-    };
-  },
   methods: {
     searchLocation() {
       console.log(this.searchTerm)
-    }
-  }
+    },
+    calculateMapHeight() {
+      return `${window.innerHeight}px`;
+    },
+  },
+  mounted () {
+    this.mapHeight = this.calculateMapHeight();
+  },
+}
+
+export const getDynamicMapHeight = (componentInstance) => {
+  return componentInstance.mapHeight;
 }
 </script>
 
