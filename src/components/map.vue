@@ -46,17 +46,16 @@
       this.center = center;
     },
     heightUpdated() {
-      this.mapHeight = getDynamicMapHeight(this.$root); console.log(typeof(this.mapHeight))
-      this.mapHeight = parseInt(this.mapHeight, 10); console.log(typeof(this.mapHeight))
+      this.mapHeight = parseInt(getDynamicMapHeight(this.$root),10); //console.log(typeof(this.mapHeight))
 
       var tileSize = 256; // tamanho padrão do tile no Leaflet
       var minZoom = 0;
       while ((tileSize * Math.pow(2, minZoom)) < this.mapHeight) 
       {
-        console.log(minZoom)
+        //console.log(minZoom)
         minZoom++;
       }
-      this.mapHeight = minZoom; console.log(this.mapHeight)
+      this.mapHeight = minZoom; //console.log(this.mapHeight)
     }
 
 
@@ -64,7 +63,7 @@
   created () {
     setTimeout(() => 
     {
-      this.mapHeight = getDynamicMapHeight(this.$root); console.log(this.mapHeight); 
+      this.mapHeight = parseInt(getDynamicMapHeight(this.$root),10); //console.log(this.mapHeight); 
     }, 10);
   },
 
