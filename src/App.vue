@@ -63,8 +63,9 @@ export const getDynamicMapHeight = (componentInstance) => {
 .search-input {
   position: absolute;
   top: 20px; /* Posicione conforme necessário */
-  left: 6.5%; /* Posicione conforme necessário */
+  left: 5.5%; /* Posicione conforme necessário */
   z-index: 999; /* Certifique-se de que o input fique sobre o mapa */
+  width: 40%;
   
   background-color: #ffffffc1;
   border: 2px solid black;
@@ -75,6 +76,6 @@ export const getDynamicMapHeight = (componentInstance) => {
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 999px;
+  border-radius: 20px;
 }
 </style>
