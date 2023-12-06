@@ -36,7 +36,7 @@ export default {
         var place = this.inputValue;
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${place}`)
           .then(response => response.json())
-          .then(data => { this.teste(data) })
+          .then(data => { this.searchResults = data })
           .catch(error => console.error('Erro na pesquisa:', error));
       }, 1500); // Tempo em milissegundos (aqui, 2000ms = 2 segundos)
     },
@@ -75,6 +75,8 @@ export default {
 }
 
 .results {
+  overflow-y: scroll;
+  
   list-style-type: none;
   padding: 0;
   margin: 0;
