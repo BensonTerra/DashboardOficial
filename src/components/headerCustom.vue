@@ -12,8 +12,8 @@
         <input type="submit" value="Pesquisar" class="ml-2">
       </div>
     </v-form>
-    <ul class="results" v-if="searchResults.length > 0">
-      <li v-for="(result, index) in searchResults" :key="index" class="result-item">
+    <ul class="results" v-if="searchResults.length > 0" :style="{ maxHeight: maxHeight + 'px' }">
+      <li class="result-item" v-for="(result, index) in searchResults" :key="index" @click="handleItemClick(result)">
         {{ result.display_name }}
       </li>
     </ul>
@@ -21,11 +21,15 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       inputValue: '',
       searchResults: [],
+      maxHeight: 0,
+      map: null,
+      markerMap: null,
     };
   },
   methods: {
@@ -36,16 +40,40 @@ export default {
         var place = this.inputValue;
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${place}`)
           .then(response => response.json())
-          .then(data => { this.searchResults = data })
+          .then(data => { 
+            this.searchResults = data; 
+            this.setMaxHeight() 
+          })
           .catch(error => console.error('Erro na pesquisa:', error));
-      }, 1500); // Tempo em milissegundos (aqui, 2000ms = 2 segundos)
+      }, 1500);
     },
-    teste(array) {
-      array.forEach(objeto => {
-      const propriedades = Object.keys(objeto);
-      console.log(propriedades);
-      })
-    }
+
+    setMaxHeight() {
+      // Defina a altura máxima para mostrar apenas 3 itens
+      const listItemHeight = 50; // Altura estimada de cada item <li> em pixels
+      const maxItemsToShow = 5;
+      const totalItems = this.searchResults.length;
+      const calculatedHeight = Math.min(listItemHeight * maxItemsToShow, listItemHeight * totalItems);
+
+      this.maxHeight = calculatedHeight;
+    },
+
+    handleItemClick(result) {
+      console.clear()
+      console.log('Você clicou em:', result);
+
+      var bounds = [
+        [result.boundingbox[0], result.boundingbox[2]], 
+        [result.boundingbox[1], result.boundingbox[3]]
+      ]; //console.log(bounds)
+      console.log(result.lat, result.lon)
+
+      this.map = this.$parent.$parent.$refs.mapComponent.mapa; console.log(this.map)
+      this.map.fitBounds(bounds);
+      this.markerMap = this.$parent.$parent.$refs.mapComponent.$refs.marker; console.log(this.markerMap)
+      
+      this.$emit('updateMarker', [result.lat, result.lon])
+    },
   },
 };
 </script>
@@ -75,8 +103,7 @@ export default {
 }
 
 .results {
-  overflow-y: scroll;
-  
+  overflow-y: auto;
   list-style-type: none;
   padding: 0;
   margin: 0;

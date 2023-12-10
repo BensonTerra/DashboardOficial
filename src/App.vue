@@ -40,7 +40,7 @@ export const getDynamicMapHeight = (componentInstance) => {
       </div>
 
       <div class="map">
-        <Map/>
+        <Map ref="mapComponent" />
       </div>
       
     </div>

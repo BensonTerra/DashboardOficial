@@ -1,19 +1,24 @@
 <template>
   <l-map
+    ref="mapa"
     :center="center"
     :zoom="zoom"
     :min-zoom="mapHeight"
     :max-bounds="maxBounds"
     :max-bounds-viscosity="1.0"
     class="map"
-    ref="map"
     @update:zoom="zoomUpdated"
     @update:center="centerUpdated"
     @ready = "heightUpdated"
     @resize="heightUpdated"
     >
     <l-tile-layer :url="url"/>
-    <L-Marker :lat-lng="markPoint"/>
+    <div ref="markers">
+      <L-Marker 
+      ref="marker" 
+      :lat-lng="markPoint" 
+      @updateMarker="updateLocation"/>
+    </div>
   </l-map>
 </template>
  
@@ -37,6 +42,7 @@
         maxBounds: [ [-90, -180], [90, 180] ],
         mapHeight: 0,
         markPoint: [51.505, -0.04],
+        mapa: null
       }
     },
     methods: {
@@ -57,13 +63,31 @@
           minZoom++;
         }
         this.mapHeight = minZoom; //console.log(this.mapHeight)
+      },
+      mapInfo() {
+        if(this.mapa == null)
+        {
+          return this.$refs.mapa.leafletObject
+        }
+        else
+        {
+          return this.mapa
+        }
+
+      },
+      updateLocation(array) {
+        console.log("updateLocation" + array[0] + " " + array[1])
       }
     },
     created () {
-      setTimeout(() => 
-      {
+      setTimeout(() => {
         this.mapHeight = parseInt(getDynamicMapHeight(this.$root),10); //console.log(this.mapHeight); 
-      }, 10);
+      }, 100);
+    },
+    mounted () {
+      setTimeout(() => {
+        this.mapa = this.mapInfo(); console.log(this.mapa);
+      }, 1000);
     },
   }
  </script> 
