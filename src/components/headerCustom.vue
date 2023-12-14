@@ -72,7 +72,6 @@ export default {
       this.map.fitBounds(bounds);
       this.markerMap = this.$parent.$parent.$refs.mapComponent.$refs.marker; console.log(this.markerMap)
       
-      this.$emit('updateMarker', [result.lat, result.lon])
     },
   },
 };

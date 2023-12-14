@@ -1,29 +1,31 @@
 <template>
   <l-map
     ref="mapa"
-    :center="center"
-    :zoom="zoom"
-    :min-zoom="mapHeight"
-    :max-bounds="maxBounds"
-    :max-bounds-viscosity="1.0"
     class="map"
+
+    :center="cCenter"
+    :zoom="cZoom"
+    :max-bounds="cMaxBounds"
+    :min-zoom="mapHeight"
+    :max-bounds-viscosity="1.0"
+
     @update:zoom="zoomUpdated"
     @update:center="centerUpdated"
-    @ready = "heightUpdated"
+
+    @ready= "heightUpdated"
     @resize="heightUpdated"
-    >
-    <l-tile-layer :url="url"/>
+  >
+    <l-tile-layer :url="cURL" :attribution="attribution"/>
     <div ref="markers">
-      <L-Marker 
-      ref="marker" 
-      :lat-lng="markPoint" 
-      @updateMarker="updateLocation"/>
+      <L-Marker ref="marker" :lat-lng="cMarkPoint" 
+      />
     </div>
   </l-map>
 </template>
  
  <script>
   import { LMap, LTileLayer,LMarker } from "@vue-leaflet/vue-leaflet";
+  import { useMapStore } from "@/stores/mapConfig"
   import { getDynamicMapHeight } from "../App.vue"
 
  
@@ -36,13 +38,9 @@
     },
     data () {
       return {
-        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        center: [51.505, -0.04],
-        zoom: 13,
-        maxBounds: [ [-90, -180], [90, 180] ],
+        mapStore: useMapStore(),
         mapHeight: 0,
-        markPoint: [51.505, -0.04],
-        mapa: null
+        attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       }
     },
     methods: {
@@ -77,17 +75,42 @@
       },
       updateLocation(array) {
         console.log("updateLocation" + array[0] + " " + array[1])
+      },
+      updatex()
+      {
+        console.log("updatex")
       }
     },
     created () {
       setTimeout(() => {
         this.mapHeight = parseInt(getDynamicMapHeight(this.$root),10); //console.log(this.mapHeight); 
       }, 100);
+      //console.log(this.mapStore)
     },
     mounted () {
       setTimeout(() => {
         this.mapa = this.mapInfo(); console.log(this.mapa);
-      }, 1000);
+      }, 2000);
+    },
+    computed: {
+      cURL() {
+        return this.mapStore.getUrl;
+      },
+      cCenter() {
+        return this.mapStore.getCenter;
+      },
+      cZoom() {
+        return this.mapStore.getZoom;
+      },
+      cMaxBounds() {
+        return this.mapStore.getMaxBounds
+      },
+      cMapHeight() {
+        return this.mapStore.getMapHeight;
+      },
+      cMarkPoint() {
+        return this.mapStore.getMarkPoint
+      }
     },
   }
  </script> 
