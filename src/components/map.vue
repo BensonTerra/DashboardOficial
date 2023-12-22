@@ -16,8 +16,9 @@
     <div ref="markers">
       <L-Marker 
       ref="marker" 
-      :lat-lng="markPoint" 
-      @updateMarker="updateLocation"/>
+      :lat-lng="markPoint"
+      
+      />
     </div>
   </l-map>
 </template>
@@ -30,10 +31,10 @@
   export default 
   {
     components: {
-      LMap,
-      LTileLayer,
-      LMarker
-    },
+    LMap,
+    LTileLayer,
+    LMarker,
+},
     data () {
       return {
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -75,8 +76,8 @@
         }
 
       },
-      updateLocation(array) {
-        console.log("updateLocation" + array[0] + " " + array[1])
+      updateLocation() {
+        console.log("updateLocation")
       }
     },
     created () {
