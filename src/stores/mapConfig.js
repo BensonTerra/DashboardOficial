@@ -32,14 +32,6 @@ export const useMapStore = defineStore('mapConfig', {
         throw error
       }
     },
-    updateMarker()
-    {
-      try {
-        this.
-      } catch (error) {
-        
-      }
-    }
   },
 
 

@@ -29,7 +29,7 @@
   import { LMap, LTileLayer,LMarker } from "@vue-leaflet/vue-leaflet";
   import { useMapStore } from "@/stores/mapConfig";
   import { getDynamicMapHeight } from "../App.vue";
-  import 'leaflet/dist/leaflet.css'; // carregar mapa
+
 
   export default {
     components: 
