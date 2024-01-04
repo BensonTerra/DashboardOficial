@@ -19,7 +19,7 @@ export default {
       console.log(this.searchTerm)
     },
     calculateMapHeight() {
-      return `${window.innerHeight}px`;
+      return `${window.innerHeight}`;
     },
   },
   mounted () {
@@ -34,6 +34,8 @@ export const getDynamicMapHeight = (componentInstance) => {
 
 <template>
   <v-app>
+
+    
     <div class="map-container">
       <div class="search-input">
         <customHeader/>
@@ -42,12 +44,13 @@ export const getDynamicMapHeight = (componentInstance) => {
       <div class="map">
         <Map ref="mapComponent"/>
       </div>
-      
+
     </div>
   </v-app>
 </template>
 
 <style scoped>
+
 .map-container {
   position: relative;
   width: 100%;
@@ -78,4 +81,9 @@ export const getDynamicMapHeight = (componentInstance) => {
   cursor: pointer;
   border-radius: 20px;
 }
+
+.transparente {
+  background-color: #ffffff00;
+}
+
 </style>

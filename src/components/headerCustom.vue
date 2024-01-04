@@ -21,8 +21,9 @@
 </template>
 
 <script>
-
+import { useMapStore } from "@/stores/mapConfig";
 export default {
+  
   data() {
     return {
       inputValue: '',
@@ -30,6 +31,7 @@ export default {
       maxHeight: 0,
       map: null,
       markerMap: null,
+      mapStore: useMapStore()
     };
   },
   methods: {
@@ -70,13 +72,8 @@ export default {
 
       this.map = this.$parent.$parent.$refs.mapComponent.mapa; console.log(this.map)
       this.map.fitBounds(bounds);
-      this.markerMap = this.$parent.$parent.$refs.mapComponent.$refs.marker; console.log(this.markerMap)
       
-<<<<<<< HEAD
-      console.log("updateLocation")
-      this.$emit('updateMarker')
-=======
->>>>>>> f779acbabcd78b47fcdd6639f35cd65751437fe7
+      
     },
   },
 };

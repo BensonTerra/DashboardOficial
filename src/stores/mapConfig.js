@@ -21,6 +21,7 @@ export const useMapStore = defineStore('mapConfig', {
     getMarkPoint: (state) => state.markPoint,
     getMapa: (state) => state.mapa
   },
+  
   actions: {
     async fetchMapa()
     {
@@ -29,6 +30,14 @@ export const useMapStore = defineStore('mapConfig', {
         this.mapa = map
       } catch (error) {
         throw error
+      }
+    },
+    updateMarker()
+    {
+      try {
+        this.
+      } catch (error) {
+        
       }
     }
   },
