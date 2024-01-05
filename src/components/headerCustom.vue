@@ -9,6 +9,7 @@
           class="custom-input"
           @input="submitSearch"
         >
+        <input type="button" value="My location" @click="getMyLocation">
         <input type="submit" value="Pesquisar" class="ml-2">
       </div>
     </v-form>
@@ -69,13 +70,35 @@ export default {
         [result.boundingbox[1], result.boundingbox[3]]
       ]; //console.log(bounds)
       console.log(result.lat, result.lon)
+      this.cord = [result.lat, result.lon]
 
       this.map = this.$parent.$parent.$refs.mapComponent.mapa; console.log(this.map)
       this.map.fitBounds(bounds);
-      
+
+      this.updateMarkerMap(this.cord)
       
     },
-  },
+    updateMarkerMap(array) {
+      this.mapStore.updateMarker(array)
+    },
+    getMyLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+          let cord = [latitude, longitude]
+          this.updateMarkerMap(cord)
+        }, (error) => {
+          console.error(error.message);
+        });
+      } else {
+        throw new Error('Geolocation is not supported');
+      }
+    }
+
+    
+  }
 };
 </script>
 

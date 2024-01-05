@@ -28,7 +28,7 @@
 <script>
   import { LMap, LTileLayer,LMarker } from "@vue-leaflet/vue-leaflet";
   import { useMapStore } from "@/stores/mapConfig";
-  import { getDynamicMapHeight } from "../App.vue";
+  import { getDynamicMapHeight } from "@/App.vue";
 
 
   export default {
@@ -89,6 +89,7 @@
       updateLocation(array) {
         console.log("updateLocation" + array[0] + " " + array[1])
       },
+
     },
     computed: {
       cURL() {

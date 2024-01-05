@@ -28,10 +28,19 @@ export const useMapStore = defineStore('mapConfig', {
       try {
         const map = await this.get(this.url); console.log(map)
         this.mapa = map
-      } catch (error) {
+      } 
+      catch (error) {
         throw error
       }
     },
+    updateMarker(cord) {
+      try {
+        this.markPoint = cord
+      } 
+      catch (error) {
+        
+      }
+    }
   },
 
 
