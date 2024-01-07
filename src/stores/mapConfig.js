@@ -38,7 +38,7 @@ export const useMapStore = defineStore('mapConfig', {
         this.markPoint = cord
       } 
       catch (error) {
-        
+        throw error
       }
     }
   },
